@@ -38,10 +38,11 @@ export rust_nightly_docker_image=solanalabs/rust-nightly:"$nightly_version"
 
   rustup_install() {
     declare toolchain=$1
-    if ! cargo +"$toolchain" -V > /dev/null; then
+#    if ! cargo +"$toolchain" -V > /dev/null; then
+    if ! cargo -vv build  > /dev/null; then
       echo "$0: Missing toolchain? Installing...: $toolchain" >&2
       rustup install "$toolchain"
-      cargo +"$toolchain" -V
+      cargo -vv build
     fi
   }
 
